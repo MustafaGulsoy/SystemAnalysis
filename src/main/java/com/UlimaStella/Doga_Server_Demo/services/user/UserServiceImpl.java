@@ -1,4 +1,4 @@
-package com.UlimaStella.Doga_Server_Demo.services;
+package com.UlimaStella.Doga_Server_Demo.services.user;
 
 import com.UlimaStella.Doga_Server_Demo.domain.Role;
 import com.UlimaStella.Doga_Server_Demo.domain.User;
@@ -15,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
