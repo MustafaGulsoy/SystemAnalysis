@@ -43,6 +43,10 @@ public class UserController {
     public ResponseEntity<List<User>> getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
     }
+    @GetMapping("/Test")
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok().body("asdasdasd");
+    }
 
     @PostMapping("/user/save")
     public ResponseEntity<User> saveUser(@RequestBody User user) {
