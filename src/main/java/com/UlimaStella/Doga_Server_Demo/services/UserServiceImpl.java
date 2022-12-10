@@ -4,6 +4,9 @@ import com.UlimaStella.Doga_Server_Demo.domain.Role;
 import com.UlimaStella.Doga_Server_Demo.domain.User;
 import com.UlimaStella.Doga_Server_Demo.repo.RoleRepo;
 import com.UlimaStella.Doga_Server_Demo.repo.UserRepo;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +17,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -79,6 +85,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         log.info("getting all user from the database");
         return userRepo.findAll();
     }
+
+
+
 
 
 }
