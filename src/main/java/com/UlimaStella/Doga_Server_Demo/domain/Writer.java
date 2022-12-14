@@ -14,14 +14,16 @@ import static javax.persistence.FetchType.EAGER;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Writer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String name;
-    private String username;
-    private String password;
-    @ManyToMany(fetch = EAGER)
-    private Collection<Role> roles = new ArrayList<>();
+    private String surname;
+    private String detail;
+    @OneToMany(fetch = EAGER)
+    private Collection<Book> books = new ArrayList<>();
+
+
 
 }

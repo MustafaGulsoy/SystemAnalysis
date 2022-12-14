@@ -3,15 +3,12 @@ package com.UlimaStella.Doga_Server_Demo.services.user;
 import com.UlimaStella.Doga_Server_Demo.domain.Role;
 import com.UlimaStella.Doga_Server_Demo.domain.User;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
 import java.util.List;
 
 public interface UserService {
 
     User saveUser(User user);
-
-
 
     Role saveRole(Role role);
 

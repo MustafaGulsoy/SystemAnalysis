@@ -1,13 +1,12 @@
 package com.UlimaStella.Doga_Server_Demo.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
+import java.util.Date;
+
+import static javax.persistence.FetchType.EAGER;
 
 @Entity
 @Data
@@ -17,4 +16,11 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @ManyToOne(fetch = EAGER)
+    private Writer writer;
+    private String name;
+    private String detail;
+    private Date publishDate;
+
+
 }
