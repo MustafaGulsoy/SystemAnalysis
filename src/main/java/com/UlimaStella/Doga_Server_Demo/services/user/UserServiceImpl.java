@@ -1,7 +1,9 @@
 package com.UlimaStella.Doga_Server_Demo.services.user;
 
+import com.UlimaStella.Doga_Server_Demo.domain.Book;
 import com.UlimaStella.Doga_Server_Demo.domain.Role;
 import com.UlimaStella.Doga_Server_Demo.domain.User;
+import com.UlimaStella.Doga_Server_Demo.repo.BookRepo;
 import com.UlimaStella.Doga_Server_Demo.repo.RoleRepo;
 import com.UlimaStella.Doga_Server_Demo.repo.UserRepo;
 
@@ -26,6 +28,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
+    private final BookRepo bookRepo;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -44,42 +47,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
 
-    @Override
-    public User saveUser(User user) {
-        log.info("Saving new user to the database");
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepo.save(user);
-    }
-
-    @Override
-    public Role saveRole(Role role) {
-
-        log.info("Saving new {} to the database", role.getName());
-        return roleRepo.save(role);
-    }
-
-    @Override
-    public void addRoleToUser(String username, String roleName) {
-
-        log.info("Adding {} to {} on the database", roleName, username);
-        User user = userRepo.findByUsername(username);
-        Role role = roleRepo.findByName(roleName);
-        user.getRoles().add(role);
-    }
 
     @Override
     public User getUser(String username) {
 
         log.info("getting {} from the database", username);
+
         return userRepo.findByUsername(username);
     }
 
     @Override
-    public List<User> getUsers() {
-
-        log.info("getting all user from the database");
-        return userRepo.findAll();
+    public void purchaseBook(long bookId, long userId){
+        User user = userRepo.findUserById(userId);
+        Book book = bookRepo.findById(bookId);
+        user.getOrderedBooks().add(book);
     }
-
-
 }

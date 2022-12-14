@@ -27,6 +27,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    private final String user = "ROLE_USER";
+    private final String admin = "ROLE_ADMIN";
+
+    private final String userPath = "/api/user/**";
+    private final String adminPath = "/api/admin/**";
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
@@ -41,9 +46,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
 
-        http.authorizeRequests().antMatchers("/api/login/**", "/api/token/refresh/**").permitAll();
-        http.authorizeRequests().antMatchers(GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
-        http.authorizeRequests().antMatchers(POST, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers("/api/login/**", "/api/user/token/refresh/**").permitAll();
+        http.authorizeRequests().antMatchers(GET, userPath).hasAnyAuthority(user);
+        http.authorizeRequests().antMatchers(POST, userPath).hasAnyAuthority(user);
+
+        http.authorizeRequests().antMatchers(GET, userPath).hasAnyAuthority(admin);
+        http.authorizeRequests().antMatchers(POST, userPath).hasAnyAuthority(admin);
+        http.authorizeRequests().antMatchers(GET, adminPath).hasAnyAuthority(admin);
+        http.authorizeRequests().antMatchers(POST, adminPath).hasAnyAuthority(admin);
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

@@ -17,7 +17,7 @@ import static javax.persistence.FetchType.EAGER;
 public class Writer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     private String name;
     private String surname;
     private String detail;

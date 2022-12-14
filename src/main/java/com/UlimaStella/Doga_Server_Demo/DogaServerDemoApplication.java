@@ -2,6 +2,7 @@ package com.UlimaStella.Doga_Server_Demo;
 
 import com.UlimaStella.Doga_Server_Demo.domain.Role;
 import com.UlimaStella.Doga_Server_Demo.domain.User;
+import com.UlimaStella.Doga_Server_Demo.services.book.AdminService;
 import com.UlimaStella.Doga_Server_Demo.services.user.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,24 +21,24 @@ public class DogaServerDemoApplication {
 	}
 
 	@Bean
-	CommandLineRunner run(UserService userService){
+	CommandLineRunner run(AdminService adminService){
 		return args -> {
-			userService.saveRole(new Role(null,"ROLE_USER"));
-			userService.saveRole(new Role(null,"ROLE_ADMIN"));
-			userService.saveRole(new Role(null,"ROLE_MANAGER"));
-			userService.saveRole(new Role(null,"ROLE_SUPER_ADMIN"));
+			adminService.saveRole(new Role(null,"ROL+E_USER"));
+			adminService.saveRole(new Role(null,"ROLE_ADMIN"));
+			adminService.saveRole(new Role(null,"ROLE_MANAGER"));
+			adminService.saveRole(new Role(null,"ROLE_SUPER_ADMIN"));
 
-			userService.saveUser(new User(null,"Mustafa Gulsoy1","Mustafa","1234",new ArrayList<>()));
-			userService.saveUser(new User(null,"Mustafa Gulsoy","user","1234",new ArrayList<>()));
-			userService.saveUser(new User(null,"Mustafa Gulsoy","manager","1234",new ArrayList<>()));
-			userService.saveUser(new User(null,"Mustafa Gulsoy","superAdmin","1234",new ArrayList<>()));
+			adminService.saveUser(new User(null,"Mustafa Gulsoy1","Mustafa","1234",new ArrayList<>(),new ArrayList<>()));
+			adminService.saveUser(new User(null,"Mustafa Gulsoy","user","1234",new ArrayList<>(),new ArrayList<>()));
+			adminService.saveUser(new User(null,"Mustafa Gulsoy","manager","1234",new ArrayList<>(),new ArrayList<>()));
+			adminService.saveUser(new User(null,"Mustafa Gulsoy","superAdmin","1234",new ArrayList<>(),new ArrayList<>()));
 
-			userService.addRoleToUser("Mustafa","ROLE_ADMIN");
-			userService.addRoleToUser("Mustafa","ROLE_USER");
-			userService.addRoleToUser("Mustafa","ROLE_SUPER_ADMIN");
-			userService.addRoleToUser("user","ROLE_USER");
-			userService.addRoleToUser("manager","ROLE_MANAGER");
-			userService.addRoleToUser("superAdmin","ROLE_SUPER_ADMIN" );
+			adminService.addRoleToUser("Mustafa","ROLE_ADMIN");
+			adminService.addRoleToUser("Mustafa","ROLE_USER");
+			adminService.addRoleToUser("Mustafa","ROLE_SUPER_ADMIN");
+			adminService.addRoleToUser("user","ROLE_USER");
+			adminService.addRoleToUser("manager","ROLE_MANAGER");
+			adminService.addRoleToUser("superAdmin","ROLE_SUPER_ADMIN" );
 
 		};
 	}

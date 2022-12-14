@@ -3,6 +3,8 @@ package com.UlimaStella.Doga_Server_Demo.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import static javax.persistence.FetchType.EAGER;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class User {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,5 +26,8 @@ public class User {
     private String password;
     @ManyToMany(fetch = EAGER)
     private Collection<Role> roles = new ArrayList<>();
+    @Fetch(value = FetchMode.SUBSELECT)
+    @ManyToMany(fetch = EAGER)
+    private Collection<Book> orderedBooks = new ArrayList<>();
 
 }
