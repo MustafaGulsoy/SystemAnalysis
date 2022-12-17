@@ -1,5 +1,6 @@
 package com.UlimaStella.Doga_Server_Demo.domain;
 
+import com.google.firebase.database.annotations.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import java.util.Collection;
 
 import static javax.persistence.FetchType.EAGER;
 
+@Table(name = "Writer")
 @Entity
 @Data
 @NoArgsConstructor
@@ -23,7 +25,6 @@ public class Writer {
     private String detail;
     @OneToMany(fetch = EAGER)
     private Collection<Book> books = new ArrayList<>();
-
 
 
 }

@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void purchaseBook(long bookId, long userId){
         User user = userRepo.findUserById(userId);
-        Book book = bookRepo.findById(bookId);
+        Book book = bookRepo.findBookById(bookId);
         user.getOrderedBooks().add(book);
     }
 }
