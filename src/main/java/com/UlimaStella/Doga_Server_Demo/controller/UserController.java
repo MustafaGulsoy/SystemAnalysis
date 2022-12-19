@@ -1,12 +1,13 @@
 package com.UlimaStella.Doga_Server_Demo.controller;
 
 
-import com.UlimaStella.Doga_Server_Demo.domain.Book;
-import com.UlimaStella.Doga_Server_Demo.domain.User;
+import com.UlimaStella.Doga_Server_Demo.domain.*;
+import com.UlimaStella.Doga_Server_Demo.models.PurchaseBook;
 import com.UlimaStella.Doga_Server_Demo.models.RoleToUser;
 import com.UlimaStella.Doga_Server_Demo.services.user.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -19,9 +20,6 @@ import java.util.*;
 import static java.util.Arrays.stream;
 
 
-
-
-import com.UlimaStella.Doga_Server_Demo.domain.Role;
 import com.UlimaStella.Doga_Server_Demo.domain.User;
 import com.UlimaStella.Doga_Server_Demo.models.RoleToUser;
 import com.auth0.jwt.JWT;
@@ -30,7 +28,6 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -53,15 +50,25 @@ public class UserController {
     private final UserService userService;
 
 
-
-
-    @GetMapping("/purchase")
-    public void purchaseBook(Book book) throws IOException {
-
-
-
-
+    @PostMapping("/book/purchase")
+    public void purchaseBook( @RequestBody PurchaseBook form) {
+        userService.purchaseBook(form.getBookId(),form.getUserId());
     }
+
+    @GetMapping("/book/getBooks")
+    public ResponseEntity<List<Book>> getBooks(@RequestParam(defaultValue = "0") Integer pageNo,
+                                                      @RequestParam(defaultValue = "10") Integer pageSize) {
+        List<Book> books = userService.getBooks(pageNo, pageSize);
+        return new ResponseEntity<List<Book>>(books,new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @GetMapping("/writer/getWriters")
+    public ResponseEntity<List<Writer>> getWriters(@RequestParam(defaultValue = "0") Integer pageNo,
+                                                  @RequestParam(defaultValue = "10") Integer pageSize) {
+        List<Writer> writers = userService.getWriters(pageNo, pageSize);
+        return new ResponseEntity<List<Writer>>(writers,new HttpHeaders(), HttpStatus.OK);
+    }
+
 
     @GetMapping("/token/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -80,15 +87,15 @@ public class UserController {
 
                 String accessToken = JWT.create()
                         .withSubject(user.getUsername())
-                        .withExpiresAt(new Date(System.currentTimeMillis() + 10*6000*1000))
+                        .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 6000 * 1000))
                         .withIssuer(request.getRequestURL().toString())
-                        .withClaim("roles",user.getRoles().stream().map(Role::getName).collect(Collectors.toList()))
+                        .withClaim("roles", user.getRoles().stream().map(Role::getName).collect(Collectors.toList()))
                         .sign(algorithm);
 
                 Map<String, String> tokens = new HashMap<>();
 
-                tokens.put("access_token",accessToken);
-                tokens.put("refreshToken",refreshToken);
+                tokens.put("access_token", accessToken);
+                tokens.put("refreshToken", refreshToken);
                 response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
                 new ObjectMapper().writeValue(response.getOutputStream(), tokens);

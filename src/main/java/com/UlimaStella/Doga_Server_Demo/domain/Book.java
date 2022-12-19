@@ -23,6 +23,7 @@ public class Book {
     private Writer writer;
     private String name;
     private String detail;
+
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date publishDate;
 

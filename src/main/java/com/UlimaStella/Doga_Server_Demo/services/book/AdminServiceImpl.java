@@ -58,7 +58,6 @@ public class AdminServiceImpl implements AdminService {
             bookFromDb.setWriter(book.getWriter());
             bookFromDb.setDetail(book.getDetail());
             bookFromDb.setPublishDate(book.getPublishDate());
-         //   bookRepo.save(bookFromDb);
             return bookFromDb;
         } else return null;
     }
