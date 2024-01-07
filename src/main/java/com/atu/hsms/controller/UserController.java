@@ -1,9 +1,10 @@
-package com.UlimaStella.Doga_Server_Demo.controller;
+package com.atu.hsms.controller;
 
 
 import com.UlimaStella.Doga_Server_Demo.domain.*;
 
-import com.UlimaStella.Doga_Server_Demo.services.user.UserService;
+import com.atu.hsms.domain.Role;
+import com.atu.hsms.services.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +17,12 @@ import java.util.*;
 import static java.util.Arrays.stream;
 
 
-import com.UlimaStella.Doga_Server_Demo.domain.User;
+import com.atu.hsms.domain.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.http.ResponseEntity;
 
 import java.util.stream.Collectors;
 

@@ -1,15 +1,12 @@
-package com.UlimaStella.Doga_Server_Demo.services.user;
+package com.atu.hsms.services.user;
 
-import com.UlimaStella.Doga_Server_Demo.domain.User;
+import com.atu.hsms.domain.User;
 
-import com.UlimaStella.Doga_Server_Demo.repo.RoleRepo;
-import com.UlimaStella.Doga_Server_Demo.repo.UserRepo;
+import com.atu.hsms.repo.RoleRepo;
+import com.atu.hsms.repo.UserRepo;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,7 +17,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

@@ -1,9 +1,9 @@
-package com.UlimaStella.Doga_Server_Demo.services.book;
+package com.atu.hsms.services.book;
 
-import com.UlimaStella.Doga_Server_Demo.domain.Role;
-import com.UlimaStella.Doga_Server_Demo.domain.User;
-import com.UlimaStella.Doga_Server_Demo.repo.RoleRepo;
-import com.UlimaStella.Doga_Server_Demo.repo.UserRepo;
+import com.atu.hsms.domain.Role;
+import com.atu.hsms.domain.User;
+import com.atu.hsms.repo.RoleRepo;
+import com.atu.hsms.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;

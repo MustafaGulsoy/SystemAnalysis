@@ -1,7 +1,7 @@
-package com.UlimaStella.Doga_Server_Demo.security;
+package com.atu.hsms.security;
 
-import com.UlimaStella.Doga_Server_Demo.filter.CustomAuthenticationFilter;
-import com.UlimaStella.Doga_Server_Demo.filter.CustomAuthorizationFilter;
+import com.atu.hsms.filter.CustomAuthenticationFilter;
+import com.atu.hsms.filter.CustomAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;

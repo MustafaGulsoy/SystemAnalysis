@@ -1,4 +1,4 @@
-package com.UlimaStella.Doga_Server_Demo.domain;
+package com.atu.hsms.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

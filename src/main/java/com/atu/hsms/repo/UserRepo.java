@@ -1,8 +1,7 @@
-package com.UlimaStella.Doga_Server_Demo.repo;
+package com.atu.hsms.repo;
 
-import com.UlimaStella.Doga_Server_Demo.domain.User;
+import com.atu.hsms.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 public interface UserRepo extends JpaRepository<User,Long> {
 

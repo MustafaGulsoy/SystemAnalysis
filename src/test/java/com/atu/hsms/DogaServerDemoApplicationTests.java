@@ -1,4 +1,4 @@
-package com.UlimaStella.Doga_Server_Demo;
+package com.atu.hsms;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

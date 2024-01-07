@@ -1,9 +1,9 @@
-package com.UlimaStella.Doga_Server_Demo.controller;
+package com.atu.hsms.controller;
 
-import com.UlimaStella.Doga_Server_Demo.domain.User;
-import com.UlimaStella.Doga_Server_Demo.models.RoleToUser;
-import com.UlimaStella.Doga_Server_Demo.services.book.AdminService;
-import com.UlimaStella.Doga_Server_Demo.services.user.UserService;
+import com.atu.hsms.domain.User;
+import com.atu.hsms.models.RoleToUser;
+import com.atu.hsms.services.book.AdminService;
+import com.atu.hsms.services.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

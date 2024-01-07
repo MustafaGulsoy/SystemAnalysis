@@ -1,7 +1,7 @@
-package com.UlimaStella.Doga_Server_Demo.services.book;
+package com.atu.hsms.services.book;
 
-import com.UlimaStella.Doga_Server_Demo.domain.Role;
-import com.UlimaStella.Doga_Server_Demo.domain.User;
+import com.atu.hsms.domain.Role;
+import com.atu.hsms.domain.User;
 
 import java.util.List;
 

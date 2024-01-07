@@ -1,4 +1,4 @@
-package com.UlimaStella.Doga_Server_Demo.filter;
+package com.atu.hsms.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

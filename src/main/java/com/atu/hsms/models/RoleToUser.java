@@ -1,4 +1,4 @@
-package com.UlimaStella.Doga_Server_Demo.models;
+package com.atu.hsms.models;
 
 import lombok.Data;
 
