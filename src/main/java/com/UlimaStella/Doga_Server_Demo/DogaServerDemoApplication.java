@@ -28,10 +28,6 @@ public class DogaServerDemoApplication {
 			adminService.saveRole(new Role(null,"ROLE_MANAGER"));
 			adminService.saveRole(new Role(null,"ROLE_SUPER_ADMIN"));
 
-			adminService.saveUser(new User(null,"Mustafa Gulsoy1","Mustafa","1234",new ArrayList<>(),new ArrayList<>()));
-			adminService.saveUser(new User(null,"Mustafa Gulsoy","user","1234",new ArrayList<>(),new ArrayList<>()));
-			adminService.saveUser(new User(null,"Mustafa Gulsoy","manager","1234",new ArrayList<>(),new ArrayList<>()));
-			adminService.saveUser(new User(null,"Mustafa Gulsoy","superAdmin","1234",new ArrayList<>(),new ArrayList<>()));
 
 			adminService.addRoleToUser("Mustafa","ROLE_ADMIN");
 			adminService.addRoleToUser("Mustafa","ROLE_USER");

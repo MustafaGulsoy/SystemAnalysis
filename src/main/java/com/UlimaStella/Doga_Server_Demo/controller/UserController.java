@@ -2,44 +2,30 @@ package com.UlimaStella.Doga_Server_Demo.controller;
 
 
 import com.UlimaStella.Doga_Server_Demo.domain.*;
-import com.UlimaStella.Doga_Server_Demo.models.PurchaseBook;
-import com.UlimaStella.Doga_Server_Demo.models.RoleToUser;
+
 import com.UlimaStella.Doga_Server_Demo.services.user.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URI;
 import java.util.*;
 
 import static java.util.Arrays.stream;
 
 
 import com.UlimaStella.Doga_Server_Demo.domain.User;
-import com.UlimaStella.Doga_Server_Demo.models.RoleToUser;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.net.URI;
-import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.util.Arrays.stream;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 
@@ -48,26 +34,6 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 @RequestMapping("/api/user")
 public class UserController {
     private final UserService userService;
-
-
-    @PostMapping("/book/purchase")
-    public void purchaseBook( @RequestBody PurchaseBook form) {
-        userService.purchaseBook(form.getBookId(),form.getUserId());
-    }
-
-    @GetMapping("/book/getBooks")
-    public ResponseEntity<List<Book>> getBooks(@RequestParam(defaultValue = "0") Integer pageNo,
-                                                      @RequestParam(defaultValue = "10") Integer pageSize) {
-        List<Book> books = userService.getBooks(pageNo, pageSize);
-        return new ResponseEntity<List<Book>>(books,new HttpHeaders(), HttpStatus.OK);
-    }
-
-    @GetMapping("/writer/getWriters")
-    public ResponseEntity<List<Writer>> getWriters(@RequestParam(defaultValue = "0") Integer pageNo,
-                                                  @RequestParam(defaultValue = "10") Integer pageSize) {
-        List<Writer> writers = userService.getWriters(pageNo, pageSize);
-        return new ResponseEntity<List<Writer>>(writers,new HttpHeaders(), HttpStatus.OK);
-    }
 
 
     @GetMapping("/token/refresh")
@@ -86,7 +52,7 @@ public class UserController {
                 User user = userService.getUser(username);
 
                 String accessToken = JWT.create()
-                        .withSubject(user.getUsername())
+                        .withSubject(user.getPhone())
                         .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 6000 * 1000))
                         .withIssuer(request.getRequestURL().toString())
                         .withClaim("roles", user.getRoles().stream().map(Role::getName).collect(Collectors.toList()))
