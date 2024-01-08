@@ -91,7 +91,6 @@ public class UserController {
             throw new RuntimeException("Refresh token is missing");
         }
     }
-
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
