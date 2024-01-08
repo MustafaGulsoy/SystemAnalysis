@@ -19,10 +19,10 @@ public class HsmsApplication {
 //	@Bean
 //	CommandLineRunner run(AdminService adminService){
 //		return args -> {
-//			adminService.saveRole(new Role(null,"ROLE_USER"));
-//			adminService.saveRole(new Role(null,"ROLE_ADMIN"));
-//			adminService.saveRole(new Role(null,"ROLE_MANAGER"));
-//			adminService.saveRole(new Role(null,"ROLE_SUPER_ADMIN"));
+//			adminService.saveRole(new Role(null, "ROLE_USER"));
+//			adminService.saveRole(new Role(null, "ROLE_ADMIN"));
+//			adminService.saveRole(new Role(null, "ROLE_MANAGER"));
+//			adminService.saveRole(new Role(null, "ROLE_SUPER_ADMIN"));
 //
 //
 //			adminService.addRoleToUser("Mustafa","ROLE_ADMIN");

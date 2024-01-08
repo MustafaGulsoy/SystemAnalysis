@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/admin")
 public class AdminController {
-    private final UserService userService;
+
     private final AdminService adminService;
     private final String path = "/api/admin";
 
@@ -81,10 +81,6 @@ public class AdminController {
     }
 
 
-
-
-
-
     @PostMapping("/role/save")
     public ResponseEntity<User> saveRole(@RequestBody User user) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path(path + "/role/save").toUriString());
@@ -93,7 +89,7 @@ public class AdminController {
 
     @PostMapping("/role/addToUser")
     public ResponseEntity<?> addRoleToUser(@RequestBody RoleToUser form) {
-        adminService.addRoleToUser(form.getUsername(), form.getUsername());
+        adminService.addRoleToUser(form.getUsername(), form.getRoleName());
         return ResponseEntity.ok().build();
     }
 

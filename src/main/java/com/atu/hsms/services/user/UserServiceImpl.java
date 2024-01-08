@@ -2,7 +2,6 @@ package com.atu.hsms.services.user;
 
 import com.atu.hsms.domain.User;
 
-import com.atu.hsms.repo.RoleRepo;
 import com.atu.hsms.repo.UserRepo;
 
 import lombok.RequiredArgsConstructor;
@@ -24,18 +23,19 @@ import java.util.Collection;
 @Slf4j
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepo userRepo;
-    private final RoleRepo roleRepo;
+
 
     private final PasswordEncoder passwordEncoder;
 
+
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepo.findByUsername(username);
+    public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
+        User user = userRepo.findByPhone(phone);
         if (user == null) {
             log.error("User not found in the database");
             throw new UsernameNotFoundException("User not found in the database");
         } else {
-            log.error("User found in the database : {}", username);
+            log.error("User found in the database : {}", phone);
         }
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         user.getRoles().forEach(role -> {
@@ -50,10 +50,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         log.info("getting {} from the database", username);
 
-        return userRepo.findByUsername(username);
+        return userRepo.findByPhone(username);
     }
+    @Override
+    public User registerUser(User user) {
 
-
-
+        userRepo.save(user);
+        return userRepo.findByPhone(user.getPhone());
+    }
 
 }

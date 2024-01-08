@@ -1,12 +1,15 @@
 package com.atu.hsms.controller;
 
 
-import com.UlimaStella.Doga_Server_Demo.domain.*;
-
 import com.atu.hsms.domain.Role;
+import com.atu.hsms.repo.UserRepo;
+import com.atu.hsms.services.book.AdminService;
 import com.atu.hsms.services.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
-import static java.util.Arrays.stream;
+import io.jsonwebtoken.security.Keys;
 
+import java.security.Key;
 
 import com.atu.hsms.domain.User;
 import com.auth0.jwt.JWT;
@@ -26,6 +30,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.stream.Collectors;
 
+import javax.xml.bind.DatatypeConverter;
+import javax.crypto.spec.SecretKeySpec;
+
+
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 
@@ -34,7 +42,9 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 @RequestMapping("/api/user")
 public class UserController {
     private final UserService userService;
-
+    private final AdminService adminService;
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepo userRepo;
 
     @GetMapping("/token/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -81,5 +91,18 @@ public class UserController {
             throw new RuntimeException("Refresh token is missing");
         }
     }
-}
 
+    @PostMapping("/register")
+    public ResponseEntity<User> registerUser(@RequestBody User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User newUser = userService.registerUser(user);
+
+        return ResponseEntity.ok().body(user);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<User> getMe(String phone) {
+
+        return ResponseEntity.ok().body(userRepo.findByPhone(phone));
+    }
+}

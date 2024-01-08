@@ -23,12 +23,11 @@ public class AdminServiceImpl implements AdminService {
 
     private final PasswordEncoder passwordEncoder;
 
-
     @Override
     public User saveUser(User user) {
 
 
-        if (userRepo.findByUsername(user.getPhone()) != null) {
+        if (userRepo.findByPhone(user.getPhone()) != null) {
             log.info("This username is already using.");
 
             return null;
@@ -81,7 +80,7 @@ public class AdminServiceImpl implements AdminService {
     public void addRoleToUser(String username, String roleName) {
 
         log.info("Adding {} to {} on the database", roleName, username);
-        User user = userRepo.findByUsername(username);
+        User user = userRepo.findByPhone(username);
         Role role = roleRepo.findByName(roleName);
         user.getRoles().add(role);
     }
